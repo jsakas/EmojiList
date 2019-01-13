@@ -10,7 +10,10 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var emojis = ["😀","😃","😄","😁","😆"]
+    var emojis : [Emoji] = [
+        Emoji(emoji: "😀", description: "Smiley face"),
+        Emoji(emoji: "😇", description: "Angel face"),
+    ]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -28,18 +31,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = emojis[indexPath.row]
+        let emoji = emojis[indexPath.row]
+        cell.textLabel?.text = emoji.emoji
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let emoji = emojis[indexPath.row]
         performSegue(withIdentifier: "moveSegue", sender: emoji)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let emojiDetailVC = segue.destination as! EmojiDetailViewController
-        emojiDetailVC.emoji = sender as! String
+        emojiDetailVC.emoji = sender as! Emoji
     }
     
     override func didReceiveMemoryWarning() {

@@ -71,23 +71,30 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llA-xr-Y4i">
+                                <rect key="frame" x="167" y="463" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="dzo-li-zQ1" firstAttribute="centerX" secondItem="Nqz-wW-f2P" secondAttribute="centerX" id="Jfu-60-gd4"/>
-                            <constraint firstItem="dzo-li-zQ1" firstAttribute="centerY" secondItem="Nqz-wW-f2P" secondAttribute="centerY" id="QOg-aB-NvP"/>
-                            <constraint firstItem="dzo-li-zQ1" firstAttribute="centerX" secondItem="Nqz-wW-f2P" secondAttribute="centerX" id="nbV-6P-otA"/>
-                            <constraint firstItem="dzo-li-zQ1" firstAttribute="top" secondItem="qXg-n9-aYf" secondAttribute="top" constant="40" id="vqA-yn-6AH"/>
+                            <constraint firstItem="llA-xr-Y4i" firstAttribute="top" secondItem="dzo-li-zQ1" secondAttribute="bottom" constant="10" id="BrT-ls-TRD"/>
+                            <constraint firstItem="dzo-li-zQ1" firstAttribute="centerX" secondItem="Nqz-wW-f2P" secondAttribute="centerX" id="SD7-yG-CZg"/>
+                            <constraint firstItem="llA-xr-Y4i" firstAttribute="top" secondItem="dzo-li-zQ1" secondAttribute="bottom" constant="10" id="XB1-Rv-yx9"/>
+                            <constraint firstItem="dzo-li-zQ1" firstAttribute="centerY" secondItem="Nqz-wW-f2P" secondAttribute="centerY" id="anY-Ur-4n0"/>
+                            <constraint firstItem="dzo-li-zQ1" firstAttribute="centerX" secondItem="llA-xr-Y4i" secondAttribute="centerX" id="fK9-Jz-eEB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qXg-n9-aYf"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Jfu-60-gd4"/>
-                                <exclude reference="vqA-yn-6AH"/>
+                                <exclude reference="BrT-ls-TRD"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="emojiDescription" destination="llA-xr-Y4i" id="0gc-SX-dkZ"/>
                         <outlet property="emojiLarge" destination="dzo-li-zQ1" id="qSt-Wd-EoH"/>
                     </connections>
                 </viewController>
