@@ -17,15 +17,8 @@ class EmojiDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let arr = emoji?.emoji?.components(separatedBy: "-")
-        let text = String(
-            String.UnicodeScalarView(
-                arr!.flatMap{ Unicode.Scalar(UInt32($0, radix: 16)!) }
-            )
-        )
-
-        emojiLarge.text = text
+        
+        emojiLarge.text = emoji?.emoji
         emojiDescription.text = emoji?.description
     }
 

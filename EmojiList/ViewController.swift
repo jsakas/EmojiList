@@ -58,22 +58,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = UITableViewCell()
         let emoji = emojis[indexPath.row]
         
-        let arr = emoji.emoji?.components(separatedBy: "-")
-
-        let text = String(
-            String.UnicodeScalarView(
-                arr!.flatMap{ Unicode.Scalar(UInt32($0, radix: 16)!) }
-            )
-        )
-        
-        var description : String
-        if (emoji.description == nil) {
-            description = ""
-        } else {
-            description = emoji.description!
-        }
-        
-        cell.textLabel?.text = "\(text) :: \(description)"
+        cell.textLabel?.text = "\(emoji.emoji!) :: \(emoji.description!)"
         return cell
     }
     
