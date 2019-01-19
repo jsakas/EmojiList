@@ -10,10 +10,9 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var emojis : [Emoji] = [
-        Emoji(emoji: "😀", description: "Smiley face"),
-        Emoji(emoji: "😇", description: "Angel face"),
-    ]
+    var emojis : [Emoji] = []
+    
+    let EMOJI_URL : String = "https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji.json"
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -23,6 +22,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        self.fetchEmojis()
+        
+    }
+    
+    func fetchEmojis () {
+        let url = URL(string: EMOJI_URL)!
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            guard error == nil,
+                let data = data else {
+                    print(error)
+                    return
+            }
+            
+            do {
+                self.emojis = try JSONDecoder().decode([Emoji].self, from: data)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            } catch let e {
+                print(e)
+            }
+            
+        }.resume()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,7 +57,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         let emoji = emojis[indexPath.row]
-        cell.textLabel?.text = emoji.emoji
+        
+        let arr = emoji.emoji?.components(separatedBy: "-")
+
+        let text = String(
+            String.UnicodeScalarView(
+                arr!.flatMap{ Unicode.Scalar(UInt32($0, radix: 16)!) }
+            )
+        )
+        
+        var description : String
+        if (emoji.description == nil) {
+            description = ""
+        } else {
+            description = emoji.description!
+        }
+        
+        cell.textLabel?.text = "\(text) :: \(description)"
         return cell
     }
     

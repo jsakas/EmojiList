@@ -10,7 +10,7 @@ import UIKit
 
 class EmojiDetailViewController: UIViewController {
     
-    var emoji = Emoji()
+    var emoji : Emoji?
 
     @IBOutlet weak var emojiLarge: UILabel!
     @IBOutlet weak var emojiDescription: UILabel!
@@ -18,10 +18,15 @@ class EmojiDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
-        emojiLarge.text = emoji.emoji
-        emojiDescription.text = emoji.description
+        let arr = emoji?.emoji?.components(separatedBy: "-")
+        let text = String(
+            String.UnicodeScalarView(
+                arr!.flatMap{ Unicode.Scalar(UInt32($0, radix: 16)!) }
+            )
+        )
+
+        emojiLarge.text = text
+        emojiDescription.text = emoji?.description
     }
 
     override func didReceiveMemoryWarning() {
